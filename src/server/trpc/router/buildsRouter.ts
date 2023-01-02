@@ -25,4 +25,14 @@ export const buildsRouter = router({
     const build = await ctx.prisma.build.findMany()
     return build
   }),
+  getBuildByID: publicProcedure
+    .input(z.object({ buildId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const build = await ctx.prisma.build.findUnique({
+        where: {
+          id: input.buildId,
+        },
+      })
+      return build
+    }),
 })

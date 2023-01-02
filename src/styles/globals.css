@@ -1,3 +1,8 @@
+html,
+main {
+  color: #fff;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

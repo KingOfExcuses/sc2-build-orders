@@ -11,8 +11,8 @@ generator client {
 }
 
 model Build {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  matchUp  String
-  title    String
-  build    String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  matchup String
+  title   String
+  build   String
 }

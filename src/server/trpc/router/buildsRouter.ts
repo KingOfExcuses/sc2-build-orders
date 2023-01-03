@@ -10,6 +10,7 @@ export const buildsRouter = router({
         matchup: z.string(),
         title: z.string(),
         build: z.string(),
+        style: z.string(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -22,8 +23,8 @@ export const buildsRouter = router({
       return build
     }),
   getBuild: publicProcedure.query(async ({ ctx }) => {
-    const build = await ctx.prisma.build.findMany()
-    return build
+    const builds = await ctx.prisma.build.findMany()
+    return builds
   }),
   getBuildByID: publicProcedure
     .input(z.object({ buildId: z.string() }))

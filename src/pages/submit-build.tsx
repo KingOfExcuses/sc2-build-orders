@@ -1,9 +1,9 @@
 import { type NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { trpc } from '../utils/trpc'
+import { buildTypes } from './builds'
 
 const Home: NextPage = () => {
   const createBuild = trpc.builds.createBuild.useMutation()
@@ -11,6 +11,7 @@ const Home: NextPage = () => {
   const [matchup, setMatchup] = useState('')
   const [title, setTitle] = useState('')
   const [build, setBuild] = useState('')
+  const [style, setStyle] = useState('')
 
   async function handleSubmitBuildOrder(e: React.FormEvent) {
     e.preventDefault()
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
       matchup,
       title,
       build,
+      style,
     })
     router.push('/builds')
   }
@@ -30,29 +32,41 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col justify-center px-4">
-        <h1 className="text-xl">Submit a Build Order</h1>
-        <Link href="/" className="m-8">
-          Home Page{' '}
-        </Link>
+        <h1 className="my-4 text-xl">Submit a Build Order</h1>
         <form onSubmit={handleSubmitBuildOrder}>
-          <label
-            htmlFor="match-up-select"
-            className="mb-2 block text-sm font-medium"
-          >
+          <label htmlFor="matchup" className="mb-2 block text-sm font-medium">
             Select Matchup
           </label>
           <select
             required
             value={matchup}
             onChange={(e) => setMatchup(e.target.value)}
-            id="match-up-select"
-            className="block w-full rounded-lg p-2.5 text-sm font-medium text-gray-dark"
+            id="matchup"
+            className="mb-4 block w-full rounded-lg p-2.5 text-sm font-medium text-gray-dark"
           >
-            <option value="">Choose the matchup</option>
             <option value="tvp">TvP</option>
             <option value="tvt">TvT</option>
             <option value="tvz">TvZ</option>
           </select>
+          <fieldset>
+            <label htmlFor="style" className="mb-2 block text-sm font-medium">
+              Select Build Type
+            </label>
+            <select
+              required
+              value={style}
+              onChange={(e) => setStyle(e.target.value)}
+              id="style"
+              className="block w-full rounded-lg p-2.5 text-sm font-medium text-gray-dark"
+            >
+              {buildTypes.map((buildType) => (
+                <option key={buildType} value={buildType}>
+                  {buildType}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+
           <label
             htmlFor="title"
             className="mb-2 block pt-4 text-sm font-medium"
@@ -63,6 +77,7 @@ const Home: NextPage = () => {
             required
             minLength={10}
             maxLength={100}
+            placeholder="Insert build title here..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             id="title"

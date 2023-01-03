@@ -3,6 +3,17 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { trpc } from '../utils/trpc'
 
+export const ecoBuildType = 'Economic'
+export const timingAttackBuildType = 'Timing Attack'
+export const allInBuildType = 'All In'
+export const cheeseBuildType = 'Cheese'
+export const buildTypes = [
+  ecoBuildType,
+  timingAttackBuildType,
+  allInBuildType,
+  cheeseBuildType,
+]
+
 const BuildsPage: NextPage = () => {
   const builds = trpc.builds.getBuild.useQuery()
 
@@ -15,7 +26,33 @@ const BuildsPage: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center px-4">
         <h1 className="text-xl">Builds</h1>
-        <div className="grid grid-cols-2 gap-4">
+        <h3 className="mb-4 font-semibold">Identification</h3>
+        <ul className="w-full items-center rounded-lg bg-navy text-sm font-medium sm:flex">
+          {buildTypes.map((buildType) => (
+            <li
+              key={buildType}
+              className="w-full border-b border-gray-light sm:border-b-0 sm:border-r"
+            >
+              <div className="flex items-center pl-3">
+                <input
+                  id={`build-radio-${buildType}`}
+                  type="radio"
+                  value={buildType}
+                  name="list-radio"
+                  className="h-4 w-4"
+                />
+                <label
+                  htmlFor={`build-radio-${buildType}`}
+                  className="ml-2 w-full py-3 text-sm font-medium"
+                >
+                  {buildType}
+                </label>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-8 grid grid-cols-2 gap-4">
           {builds.data?.map((build) => (
             <div
               key={build.id}

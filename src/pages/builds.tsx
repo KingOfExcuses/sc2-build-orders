@@ -1,6 +1,7 @@
 import { type NextPage } from 'next'
 import Head from 'next/head'
 import BuildCard from '../components/buildCard'
+import StyleFilter from '../components/styleFilter'
 
 export const ecoBuildType = 'Economic'
 export const timingAttackBuildType = 'Timing Attack'
@@ -22,67 +23,9 @@ const BuildsPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center px-4">
-        <h1 className="text-xl">Builds</h1>
-        <h3 className="mb-4 font-semibold">Identification</h3>
-        <ul className="w-full items-center rounded-lg bg-navy text-sm font-medium sm:flex">
-          {buildTypes.map((buildType) => (
-            <li
-              key={buildType}
-              className="w-full border-b border-gray-light sm:border-b-0 sm:border-r"
-            >
-              <div className="flex items-center pl-3">
-                <input
-                  id={`build-radio-${buildType}`}
-                  type="radio"
-                  value={buildType}
-                  name="list-radio"
-                  className="h-4 w-4"
-                />
-                <label
-                  htmlFor={`build-radio-${buildType}`}
-                  className="ml-2 w-full py-3 text-sm font-medium"
-                >
-                  {buildType}
-                </label>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <h1 className="m-8 text-2xl">Builds</h1>
+        <StyleFilter />
         <BuildCard />
-        {/* <div className="mt-8 grid grid-cols-2 gap-4">
-          {builds.data?.map((build) => (
-            <div
-              key={build.id}
-              className="max-w-sm rounded-lg bg-navy p-6 shadow-md"
-            >
-              <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                {build.title}
-              </h5>
-              <p className="mb-3 font-normal">
-                {build.build?.substring(0, 100) + '...'}
-              </p>
-              <Link
-                href={`/builds/${build.id}`}
-                className="inline-flex items-center rounded-lg bg-orange px-3 py-2 text-center text-sm font-medium hover:bg-white hover:text-navy"
-              >
-                View Build
-                <svg
-                  aria-hidden="true"
-                  className="ml-2 -mr-1 h-4 w-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </Link>
-            </div>
-          ))}
-        </div> */}
       </main>
     </>
   )

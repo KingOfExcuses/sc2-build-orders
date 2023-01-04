@@ -1,7 +1,6 @@
 import { type NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
-import { trpc } from '../utils/trpc'
+import BuildCard from '../components/buildCard'
 
 export const ecoBuildType = 'Economic'
 export const timingAttackBuildType = 'Timing Attack'
@@ -15,8 +14,6 @@ export const buildTypes = [
 ]
 
 const BuildsPage: NextPage = () => {
-  const builds = trpc.builds.getBuild.useQuery()
-
   return (
     <>
       <Head>
@@ -51,8 +48,8 @@ const BuildsPage: NextPage = () => {
             </li>
           ))}
         </ul>
-
-        <div className="mt-8 grid grid-cols-2 gap-4">
+        <BuildCard />
+        {/* <div className="mt-8 grid grid-cols-2 gap-4">
           {builds.data?.map((build) => (
             <div
               key={build.id}
@@ -85,7 +82,7 @@ const BuildsPage: NextPage = () => {
               </Link>
             </div>
           ))}
-        </div>
+        </div> */}
       </main>
     </>
   )

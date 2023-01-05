@@ -5,6 +5,7 @@ import { useState } from 'react'
 const Home: NextPage = () => {
   const [race, setRace] = useState('')
   const [raceOpponent, setRaceOpponent] = useState('')
+  // const races = [terran, protoss, zerg]
 
   function handleMatchup(e: React.FormEvent) {
     e.preventDefault()

@@ -1,14 +1,29 @@
 import { type NextPage } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const Home: NextPage = () => {
+  const router = useRouter()
   const [race, setRace] = useState('')
   const [raceOpponent, setRaceOpponent] = useState('')
-  // const races = [terran, protoss, zerg]
+
+  function handleRace(e: React.MouseEvent) {
+    e.preventDefault()
+    setRace((e.target as HTMLInputElement).id)
+  }
+
+  function handleRaceOpponent(e: React.MouseEvent) {
+    e.preventDefault()
+    setRaceOpponent((e.target as HTMLInputElement).id)
+  }
 
   function handleMatchup(e: React.FormEvent) {
     e.preventDefault()
+    router.push(
+      `/matchups/${race.toLowerCase()}/vs/${raceOpponent.toLowerCase()}`
+    )
+
     console.log(race, raceOpponent)
   }
 
@@ -22,17 +37,14 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center px-4 pt-36">
         <h1 className="text-2xl">Welcome to SC2 Build Orders</h1>
 
-        <form
-          onSubmit={handleMatchup}
-          className="container mx-auto mt-8 grid grid-cols-2 justify-between"
-        >
-          <div className="flex flex-col items-center text-xl font-medium">
-            Your Race
+        <form className="mt-8">
+          <h2 className="flex flex-col items-center text-xl">Your Race</h2>
+          <div className="flex items-center">
             <input
               type="image"
               id="terran"
               value={race}
-              onClick={(e) => setRace((e.target as HTMLInputElement).id)}
+              onClick={handleRace}
               src="/images/terran.png"
               alt="terran"
               width="auto"
@@ -42,7 +54,7 @@ const Home: NextPage = () => {
               type="image"
               id="protoss"
               value={race}
-              onClick={(e) => setRace((e.target as HTMLInputElement).id)}
+              onClick={handleRace}
               src="/images/protoss.png"
               alt="protoss"
               width="auto"
@@ -52,7 +64,7 @@ const Home: NextPage = () => {
               type="image"
               id="zerg"
               value={race}
-              onClick={(e) => setRace((e.target as HTMLInputElement).id)}
+              onClick={handleRace}
               src="/images/zerg.png"
               alt="zerg"
               width="auto"
@@ -60,17 +72,18 @@ const Home: NextPage = () => {
             />
           </div>
 
-          {/* <div>VS</div> */}
-          <div className="flex flex-col items-center text-xl font-medium">
-            {' '}
+          <div className="my-4 flex flex-col items-center text-4xl font-extrabold">
+            VS
+          </div>
+          <h2 className="flex flex-col items-center text-xl">
             Opponent&apos;s Race
+          </h2>
+          <div className="flex items-center text-xl font-medium">
             <input
               type="image"
               id="terran"
               value={raceOpponent}
-              onClick={(e) =>
-                setRaceOpponent((e.target as HTMLInputElement).id)
-              }
+              onClick={handleRaceOpponent}
               src="/images/terran.png"
               alt="terran"
               width="auto"
@@ -80,9 +93,7 @@ const Home: NextPage = () => {
               type="image"
               id="protoss"
               value={raceOpponent}
-              onClick={(e) =>
-                setRaceOpponent((e.target as HTMLInputElement).id)
-              }
+              onClick={handleRaceOpponent}
               src="/images/protoss.png"
               alt="protoss"
               width="auto"
@@ -92,9 +103,7 @@ const Home: NextPage = () => {
               type="image"
               id="zerg"
               value={raceOpponent}
-              onClick={(e) =>
-                setRaceOpponent((e.target as HTMLInputElement).id)
-              }
+              onClick={handleRaceOpponent}
               src="/images/zerg.png"
               alt="zerg"
               width="auto"
@@ -102,6 +111,14 @@ const Home: NextPage = () => {
             />
           </div>
         </form>
+        <div className="mt-4 flex justify-center">
+          <button
+            className="items-center rounded-lg bg-orange px-3 py-2 text-center text-sm font-medium hover:bg-white hover:text-navy"
+            onClick={handleMatchup}
+          >
+            Submit
+          </button>
+        </div>
       </main>
     </>
   )

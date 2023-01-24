@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { trpc } from '../utils/trpc'
-import { buildTypes } from './builds'
+import { buildTypes } from './matchups/[race]/vs/[raceOpponent]'
 
 const Home: NextPage = () => {
   const createBuild = trpc.builds.createBuild.useMutation()

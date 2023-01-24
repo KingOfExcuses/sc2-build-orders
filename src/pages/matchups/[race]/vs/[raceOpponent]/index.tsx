@@ -1,7 +1,9 @@
 import { type NextPage } from 'next'
 import Head from 'next/head'
-import BuildCard from '../components/buildCard'
-import StyleFilter from '../components/styleFilter'
+import { useRouter } from 'next/router'
+import BuildCard from '../../../../../components/buildCard'
+import StyleFilter from '../../../../../components/styleFilter'
+import { trpc } from '../../../../../utils/trpc'
 
 export const ecoBuildType = 'Economic'
 export const timingAttackBuildType = 'Timing Attack'
@@ -15,6 +17,19 @@ export const buildTypes = [
 ]
 
 const BuildsPage: NextPage = () => {
+  const router = useRouter()
+
+  const { race = '', raceOpponent = '' } = router.query as {
+    race: string
+    raceOpponent: string
+  }
+
+  const builds = trpc.builds.getBuildsByMatchup.useQuery({
+    matchup: `${race.toLowerCase().charAt(0)}v${raceOpponent
+      .toLowerCase()
+      .charAt(0)}`,
+  })
+
   return (
     <>
       <Head>
@@ -25,7 +40,10 @@ const BuildsPage: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center px-4">
         <h1 className="m-8 text-2xl">Builds</h1>
         <StyleFilter />
-        <BuildCard />
+        {/* <BuildCard /> */}
+        {builds.data?.map((build) => (
+          <BuildCard key={build.id} build={build} />
+        ))}
       </main>
     </>
   )

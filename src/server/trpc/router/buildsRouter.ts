@@ -36,4 +36,14 @@ export const buildsRouter = router({
       })
       return build
     }),
+  getBuildsByMatchup: publicProcedure
+    .input(z.object({ matchup: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const builds = await ctx.prisma.build.findMany({
+        where: {
+          matchup: input.matchup,
+        },
+      })
+      return builds
+    }),
 })

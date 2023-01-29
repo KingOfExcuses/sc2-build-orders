@@ -5,8 +5,8 @@ import { useState } from 'react'
 
 const Home: NextPage = () => {
   const router = useRouter()
-  const [race, setRace] = useState('')
-  const [raceOpponent, setRaceOpponent] = useState('')
+  const [race, setRace] = useState('default')
+  const [raceOpponent, setRaceOpponent] = useState('default')
 
   function handleRace(e: React.MouseEvent) {
     e.preventDefault()
@@ -23,8 +23,6 @@ const Home: NextPage = () => {
     router.push(
       `/matchups/${race.toLowerCase()}/vs/${raceOpponent.toLowerCase()}`
     )
-
-    console.log(race, raceOpponent)
   }
 
   return (
@@ -41,6 +39,9 @@ const Home: NextPage = () => {
           <h2 className="flex flex-col items-center text-xl">Your Race</h2>
           <div className="flex items-center">
             <input
+              className={
+                race === 'terran' || race === 'default' ? '' : 'grayscale'
+              }
               type="image"
               id="terran"
               value={race}
@@ -51,16 +52,22 @@ const Home: NextPage = () => {
               height="auto"
             />
             <input
+              className={
+                race === 'protoss' || race === 'default' ? '' : 'grayscale'
+              }
               type="image"
               id="protoss"
               value={race}
               onClick={handleRace}
               src="/images/protoss.png"
               alt="protoss"
-              width="200"
-              height="auto"
+              width="auto"
+              height="200"
             />
             <input
+              className={
+                race === 'zerg' || race === 'default' ? '' : 'grayscale'
+              }
               type="image"
               id="zerg"
               value={race}
@@ -80,6 +87,11 @@ const Home: NextPage = () => {
           </h2>
           <div className="flex items-center">
             <input
+              className={
+                raceOpponent === 'terran' || raceOpponent === 'default'
+                  ? ''
+                  : 'grayscale'
+              }
               type="image"
               id="terran"
               value={raceOpponent}
@@ -90,16 +102,26 @@ const Home: NextPage = () => {
               height="auto"
             />
             <input
+              className={
+                raceOpponent === 'protoss' || raceOpponent === 'default'
+                  ? ''
+                  : 'grayscale'
+              }
               type="image"
               id="protoss"
               value={raceOpponent}
               onClick={handleRaceOpponent}
               src="/images/protoss.png"
               alt="protoss"
-              width="200"
-              height="auto"
+              width="auto"
+              height="200"
             />
             <input
+              className={
+                raceOpponent === 'zerg' || raceOpponent === 'default'
+                  ? ''
+                  : 'grayscale'
+              }
               type="image"
               id="zerg"
               value={raceOpponent}

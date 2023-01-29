@@ -5,8 +5,9 @@ import { useState } from 'react'
 
 const Home: NextPage = () => {
   const router = useRouter()
-  const [race, setRace] = useState('default')
-  const [raceOpponent, setRaceOpponent] = useState('default')
+  const [race, setRace] = useState('')
+  const [raceOpponent, setRaceOpponent] = useState('')
+  const isButtonDisabled = race.length === 0 || raceOpponent.length === 0
 
   function handleRace(e: React.MouseEvent) {
     e.preventDefault()
@@ -40,7 +41,7 @@ const Home: NextPage = () => {
           <div className="flex items-center">
             <input
               className={
-                race === 'terran' || race === 'default' ? '' : 'grayscale'
+                race === 'terran' || race.length === 0 ? '' : 'grayscale'
               }
               type="image"
               id="terran"
@@ -53,7 +54,7 @@ const Home: NextPage = () => {
             />
             <input
               className={
-                race === 'protoss' || race === 'default' ? '' : 'grayscale'
+                race === 'protoss' || race.length === 0 ? '' : 'grayscale'
               }
               type="image"
               id="protoss"
@@ -66,7 +67,7 @@ const Home: NextPage = () => {
             />
             <input
               className={
-                race === 'zerg' || race === 'default' ? '' : 'grayscale'
+                race === 'zerg' || race.length === 0 ? '' : 'grayscale'
               }
               type="image"
               id="zerg"
@@ -88,7 +89,7 @@ const Home: NextPage = () => {
           <div className="flex items-center">
             <input
               className={
-                raceOpponent === 'terran' || raceOpponent === 'default'
+                raceOpponent === 'terran' || raceOpponent.length === 0
                   ? ''
                   : 'grayscale'
               }
@@ -103,7 +104,7 @@ const Home: NextPage = () => {
             />
             <input
               className={
-                raceOpponent === 'protoss' || raceOpponent === 'default'
+                raceOpponent === 'protoss' || raceOpponent.length === 0
                   ? ''
                   : 'grayscale'
               }
@@ -118,7 +119,7 @@ const Home: NextPage = () => {
             />
             <input
               className={
-                raceOpponent === 'zerg' || raceOpponent === 'default'
+                raceOpponent === 'zerg' || raceOpponent.length === 0
                   ? ''
                   : 'grayscale'
               }
@@ -134,7 +135,8 @@ const Home: NextPage = () => {
           </div>
           <div className="mt-4 flex justify-center">
             <button
-              className="w-full items-center rounded-lg bg-orange px-4 py-2 text-center text-sm font-medium hover:bg-white hover:text-navy"
+              disabled={isButtonDisabled}
+              className="w-full items-center rounded-lg bg-orange px-4 py-2 text-center text-sm font-medium hover:bg-white hover:text-navy disabled:cursor-not-allowed disabled:opacity-10"
               onClick={handleMatchup}
             >
               Submit

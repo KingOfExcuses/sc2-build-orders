@@ -79,10 +79,13 @@ const Home: NextPage = () => {
               height="auto"
             />
           </div>
-
-          <div className="my-4 flex flex-col items-center text-4xl font-extrabold">
-            ----- VS -----
+          <div className="my-8 inline-flex w-full items-center justify-center">
+            <hr className="h-1 w-96 border-0 bg-gray-light" />
+            <span className="absolute left-1/2 -translate-x-1/2 bg-gray-dark px-3 text-4xl font-medium">
+              VS
+            </span>
           </div>
+
           <h2 className="mt-8 flex flex-col items-center text-xl">
             Opponent&apos;s Race
           </h2>

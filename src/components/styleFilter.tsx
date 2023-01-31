@@ -14,13 +14,10 @@ export const buildTypes = [
 const StyleFilter = () => {
   return (
     <>
-      <h3 className="mb-4 font-semibold">Style</h3>
-      <ul className="w-full items-center rounded-lg bg-navy text-sm font-medium sm:flex">
+      <h2 className="mb-4 font-semibold">Style</h2>
+      <ul className="w-1/6 items-center rounded-lg bg-navy text-sm font-medium">
         {buildTypes.map((buildType) => (
-          <li
-            key={buildType}
-            className="w-full border-b border-gray-light sm:border-b-0 sm:border-r"
-          >
+          <li key={buildType} className="w-full border-b border-gray-light">
             <div className="flex items-center pl-3">
               <input
                 id={`build-radio-${buildType}`}

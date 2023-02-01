@@ -80,7 +80,7 @@ const Home: NextPage = () => {
               />
             </div>
             <div className="my-8 inline-flex w-full items-center justify-center">
-              <hr className="h-1 w-96 border-0 bg-gray-light" />
+              <hr className="h-1 w-full border-0 bg-gray-light" />
               <span className="absolute left-1/2 -translate-x-1/2 bg-gray-dark px-3 text-4xl font-medium">
                 VS
               </span>

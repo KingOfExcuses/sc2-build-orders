@@ -6,8 +6,8 @@ import { trpc } from '../utils/trpc'
 import { buildTypes } from './matchups/[race]/vs/[raceOpponent]'
 
 const Home: NextPage = () => {
-  const createBuild = trpc.builds.createBuild.useMutation()
   const router = useRouter()
+  const createBuild = trpc.builds.createBuild.useMutation()
   const [matchup, setMatchup] = useState('')
   const [title, setTitle] = useState('')
   const [build, setBuild] = useState('')
@@ -35,9 +35,11 @@ const Home: NextPage = () => {
       <main className="container m-auto flex h-screen flex-col justify-center p-12">
         <h1 className="items-center py-8 text-xl">Submit a Build Order</h1>
         <form onSubmit={handleSubmitBuildOrder}>
-          <fieldset>
-            <div className="flex w-1/4 justify-between gap-8">
-              <div className="w-1/2">
+          <fieldset className="w-1/2">
+            {/* Matchup and Style */}
+            <div className="flex gap-8">
+              {/* Select Matchup */}
+              <div>
                 <label
                   className="mb-2 block text-sm font-medium"
                   htmlFor="matchup"
@@ -45,7 +47,7 @@ const Home: NextPage = () => {
                   Matchup
                 </label>
                 <select
-                  className="mb-4 block w-full rounded-lg p-2.5 text-sm font-medium text-gray-dark"
+                  className="mb-4 block rounded-lg p-2.5 text-sm font-medium text-gray-dark"
                   required
                   value={matchup}
                   onChange={(e) => setMatchup(e.target.value)}
@@ -56,7 +58,9 @@ const Home: NextPage = () => {
                   <option value="tvz">TvZ</option>
                 </select>
               </div>
-              <div className="w-1/2">
+
+              {/* Select Style */}
+              <div>
                 <label
                   className="mb-2 block text-sm font-medium"
                   htmlFor="style"
@@ -78,7 +82,9 @@ const Home: NextPage = () => {
                 </select>
               </div>
             </div>
-            <div className="w-1/2">
+
+            {/* Build Title */}
+            <div>
               <label className="mb-2 block text-sm font-medium" htmlFor="title">
                 Build Title
               </label>
@@ -93,6 +99,8 @@ const Home: NextPage = () => {
                 id="title"
                 type="text"
               />
+
+              {/* Build */}
               <label
                 htmlFor="build"
                 className="mb-2 block pt-4 text-sm font-medium"

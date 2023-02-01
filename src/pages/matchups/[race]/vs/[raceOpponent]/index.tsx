@@ -55,9 +55,8 @@ const FindBuildsPage: NextPage = () => {
               height={200}
             />
           </div>
-          <div className="flex h-full">
+          <div className="flex">
             {/* Left Colum - Filters */}
-            {/* <StyleFilter /> */}
             <div className="w-1/6">
               <h1 className="mb-2 font-semibold">Style</h1>
               <ul className="items-center rounded-lg bg-navy text-sm font-medium">
@@ -84,8 +83,9 @@ const FindBuildsPage: NextPage = () => {
                 ))}
               </ul>
             </div>
+
             {/* Right Column - Build Cards */}
-            <div className="w-5/6 px-10">
+            <div className="px-10">
               {filteredBuilds.map((build) => (
                 <BuildCard key={build.id} build={build} />
               ))}

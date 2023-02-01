@@ -2,16 +2,16 @@ import { type NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { styles } from '../components/styleFilter'
 import { trpc } from '../utils/trpc'
-import { buildTypes } from './matchups/[race]/vs/[raceOpponent]'
 
 const Home: NextPage = () => {
   const router = useRouter()
   const createBuild = trpc.builds.createBuild.useMutation()
-  const [matchup, setMatchup] = useState('')
+  const [matchup, setMatchup] = useState('tvp')
+  const [style, setStyle] = useState('All In')
   const [title, setTitle] = useState('')
   const [build, setBuild] = useState('')
-  const [style, setStyle] = useState('')
   const isButtonDisabled = title.length === 10 || build.length === 0
 
   async function handleSubmitBuildOrder(e: React.FormEvent) {
@@ -65,7 +65,7 @@ const Home: NextPage = () => {
                   className="mb-2 block text-sm font-medium"
                   htmlFor="style"
                 >
-                  Build Type
+                  Style
                 </label>
                 <select
                   className="block w-full rounded-lg p-2.5 text-sm font-medium text-gray-dark"
@@ -74,9 +74,9 @@ const Home: NextPage = () => {
                   onChange={(e) => setStyle(e.target.value)}
                   id="style"
                 >
-                  {buildTypes.map((buildType) => (
-                    <option key={buildType} value={buildType}>
-                      {buildType}
+                  {styles.map((style) => (
+                    <option key={style} value={style}>
+                      {style}
                     </option>
                   ))}
                 </select>
